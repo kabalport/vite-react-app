@@ -72,7 +72,7 @@ function TarotComponent() {
             return;
         }
 
-        let newFlippedCards = new Set(flippedCards);
+        const newFlippedCards = new Set(flippedCards);
         newFlippedCards.add(card);
 
         setFlippedCards(newFlippedCards);
