@@ -17,12 +17,19 @@ function MainHeader() {
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
     const [drawerOpen, setDrawerOpen] = React.useState(false);
 
-    const toggleDrawer = (open) => (event) => {
-        if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+    const toggleDrawer = (open: boolean) => (
+        event: React.KeyboardEvent | React.MouseEvent
+    ) => {
+        if (
+            event.type === 'keydown' &&
+            ((event as React.KeyboardEvent).key === 'Tab' ||
+                (event as React.KeyboardEvent).key === 'Shift')
+        ) {
             return;
         }
         setDrawerOpen(open);
     };
+
 
     const navLinks = ['About', 'Services'];
 
