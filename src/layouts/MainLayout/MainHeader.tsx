@@ -31,7 +31,7 @@ function MainHeader() {
             <List>
                 {navLinks.map((text) => (
                     <ListItem key={text} onClick={toggleDrawer(false)}>
-                        <NavLink to={`/${text.toLowerCase()}`} activeClassName="activeLink">
+                        <NavLink to={`/${text.toLowerCase()}`}>
                             <ListItemText primary={text} />
                         </NavLink>
                     </ListItem>
