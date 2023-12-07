@@ -1,24 +1,23 @@
 import MainHeader from './MainHeader';
 import MainFooter from './MainFooter';
 import * as React from 'react';
-import PropTypes from "prop-types"
+import PropTypes from 'prop-types';
+import { Box } from '@mui/material';
 
 const MainLayout = (props: any) => {
     return (
-        <React.Fragment>
-        <div>
+        <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
             <MainHeader />
-            <div style={{ display: 'flex' }}>
-                    {props.children}
-            </div>
+            <Box component="main" sx={{ flexGrow: 1, display: 'flex' }}>
+                {props.children}
+            </Box>
             <MainFooter />
-        </div>
-            </React.Fragment>
+        </Box>
     );
 };
 
 MainLayout.propTypes = {
-    children: PropTypes.any,
+    children: PropTypes.node,  // Updated to 'node' which is more appropriate for children
     location: PropTypes.object,
 }
 

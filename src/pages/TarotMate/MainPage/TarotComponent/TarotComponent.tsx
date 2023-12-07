@@ -21,6 +21,7 @@ function TarotComponent() {
     const [openSnackbar, setOpenSnackbar] = useState(false); // Snackbar 상태 추가
     const [fortuneType, setFortuneType] = useState(''); // 운세 유형 상태 추가
     const [showTarotCards, setShowTarotCards] = useState(false); // State to toggle visibility of tarot cards
+    const [showResults, setShowResults] = useState(false); // 결과 표시 여부 관리
 
     // 버튼 클릭 핸들러
     const handleFortuneType = (type: string) => {
@@ -52,12 +53,6 @@ function TarotComponent() {
         { number: 20, name: "심판", image: "../images/major_arcana_judgement.png" },
         { number: 21, name: "세계", image: "../images/major_arcana_world.png" }
     ];
-
-
-// Replace "../images/" with the actual path to the directory where the images are stored.
-
-
-
 
 
     const toggleCardSelection = (card: string) => {
@@ -113,6 +108,7 @@ function TarotComponent() {
         try {
             const result: any = await gptTarot(tarotPrompt);
             setResponse(result.choices);
+            setShowResults(true); // 결과를 표시하도록 설정
         } catch (error) {
             console.error('Error fetching GPT response:', error);
             setResponse([]);
@@ -149,18 +145,24 @@ function TarotComponent() {
         <div style={{
             backgroundColor: '#1a1a2e', // 전체 배경색
             color: 'white',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center', // 수직 중앙 정렬
+            alignItems: 'center', // 수평 중앙 정렬
+            minHeight: '100vh', // 전체 높이 차지
+            width: '100%', // 너비를 100%로 설정
         }}>
             <div style={{
                 padding: '20px',
-                margin: 'auto', // 자동 마진을 사용하여 좌우 중앙 정렬
-                maxWidth: '70%', // 최대 너비를 90%로 설정하여 여백 유지
+                width: '100%', // 너비를 100%로 설정
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
-                backgroundColor: '#1a1a2e', // 어두운 배경 색상 추가
-                color: 'white' // 텍스트 색상을 밝게 변경
+                backgroundColor: '#1a1a2e',
+                color: 'white'
             }}>
-
+                {!showTarotCards && (
+               <>
                 {fortuneType || (
                     <Typography variant="h5" style={{ color: 'gold', marginBottom: '20px' }}>
                     선택한 카드를 통해 운세를 점쳐드립니다.</Typography>
@@ -191,8 +193,6 @@ function TarotComponent() {
                         `${3 - selectedCards.length}장의 카드를 신중하게 선택해 주세요.`
                     }
                 </Typography>
-
-                {!showTarotCards && (
                     <Button
                         variant="contained"
                         onClick={handleShowTarotCards}
@@ -200,31 +200,10 @@ function TarotComponent() {
                     >
                         타로 카드 보기
                     </Button>
+               </>
                 )}
-
-
-                <div style={{ textAlign: 'center', padding: '20px 0' }}> {/* 버튼을 중앙에 정렬 */}
-                    {showTarotCards && (
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={handleButtonClick}
-                        disabled={selectedCards.length !== 3 || isLoading}
-                        style={{
-                            marginBottom: '20px',
-                            padding: '15px 30px',
-                            fontSize: '1rem',
-                            borderRadius: '25px',
-                            boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.25)',
-                            backgroundColor: selectedCards.length !== 3 || isLoading ? '#bdbdbd' : '', // 비활성화 시 회색으로 변경
-                            color: selectedCards.length !== 3 || isLoading ? '#757575' : '' // 비활성화 시 텍스트 색 변경
-                        }}
-                    >
-                        타로하기
-                    </Button>
-                    )}
-                </div>
-                {showTarotCards && (
+                {showTarotCards && !showResults &&
+                    (<>
             <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', margin: '10px' }}>
                 {tarotCards.map((card, index) => (
                     <Card
@@ -271,30 +250,57 @@ function TarotComponent() {
                     </Card>
                 ))}
             </div>
-                )}
-                {showTarotCards && (
             <Typography variant="h5" style={{ color: 'gold', marginBottom: '20px' }}>
                 {`남은 카드 선택 가능 수: ${3 - selectedCards.length}`}
             </Typography>
-                    )}
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            onClick={handleButtonClick}
+                            disabled={selectedCards.length !== 3 || isLoading}
+                            style={{
+                                marginBottom: '20px',
+                                padding: '15px 30px',
+                                fontSize: '1rem',
+                                borderRadius: '25px',
+                                boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.25)',
+                                backgroundColor: selectedCards.length !== 3 || isLoading ? '#bdbdbd' : '', // 비활성화 시 회색으로 변경
+                                color: selectedCards.length !== 3 || isLoading ? '#757575' : '' // 비활성화 시 텍스트 색 변경
+                            }}
+                        >
+                            타로하기
+                        </Button>
+
             <Typography variant="h6" style={{ marginTop: '20px' }}>
                 {selectedCardsText} {/* 로딩 중 선택된 카드 텍스트 표시 */}
             </Typography>
+                    </>
+                )}
+
             {isLoading ? (
                 <>
                 <CircularProgress />
                 <Typography style={{ marginLeft: '10px' }}>응답을 기다리는 중...</Typography>
                 </>
                 ) : (
+
                 // 결과 표시 영역
+             <>
+                {showResults && (
+
                     response && response.map((res, index) => (
                         <Card key={index} style={{ margin: '10px', maxWidth: 600 }}>
                         <CardContent>
                             {renderResponse(res.message.content)}
                         </CardContent>
                     </Card>
+
                 ))
+
             )}
+             </>
+
+                )}
             </div>
         </div>
     );
