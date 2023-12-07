@@ -20,6 +20,7 @@ function TarotComponent() {
     const [flippedCards, setFlippedCards] = useState<Set<string>>(new Set());
     const [openSnackbar, setOpenSnackbar] = useState(false); // Snackbar 상태 추가
     const [fortuneType, setFortuneType] = useState(''); // 운세 유형 상태 추가
+    const [showTarotCards, setShowTarotCards] = useState(false); // State to toggle visibility of tarot cards
 
     // 버튼 클릭 핸들러
     const handleFortuneType = (type: string) => {
@@ -139,7 +140,9 @@ function TarotComponent() {
     };
 
 
-
+    const handleShowTarotCards = () => {
+        setShowTarotCards(true);
+    };
 
 
     return (
@@ -188,7 +191,20 @@ function TarotComponent() {
                         `${3 - selectedCards.length}장의 카드를 신중하게 선택해 주세요.`
                     }
                 </Typography>
+
+                {!showTarotCards && (
+                    <Button
+                        variant="contained"
+                        onClick={handleShowTarotCards}
+                        style={{ marginBottom: '20px' }}
+                    >
+                        타로 카드 보기
+                    </Button>
+                )}
+
+
                 <div style={{ textAlign: 'center', padding: '20px 0' }}> {/* 버튼을 중앙에 정렬 */}
+                    {showTarotCards && (
                     <Button
                         variant="contained"
                         color="primary"
@@ -206,11 +222,10 @@ function TarotComponent() {
                     >
                         타로하기
                     </Button>
+                    )}
                 </div>
+                {showTarotCards && (
             <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', margin: '10px' }}>
-
-
-
                 {tarotCards.map((card, index) => (
                     <Card
                         key={index}
@@ -256,10 +271,12 @@ function TarotComponent() {
                     </Card>
                 ))}
             </div>
+                )}
+                {showTarotCards && (
             <Typography variant="h5" style={{ color: 'gold', marginBottom: '20px' }}>
                 {`남은 카드 선택 가능 수: ${3 - selectedCards.length}`}
             </Typography>
-
+                    )}
             <Typography variant="h6" style={{ marginTop: '20px' }}>
                 {selectedCardsText} {/* 로딩 중 선택된 카드 텍스트 표시 */}
             </Typography>
