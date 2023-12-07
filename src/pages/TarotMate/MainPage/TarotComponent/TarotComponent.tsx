@@ -163,6 +163,11 @@ function TarotComponent() {
             }}>
                 {!showTarotCards && (
                <>
+                   <div style={{ marginBottom: '20px' }}>
+                       <Button variant="contained" onClick={() => handleFortuneType('오늘의 운세')}>오늘의 운세</Button>
+                       <Button variant="contained" onClick={() => handleFortuneType('연애운')}>연애운</Button>
+                       <Button variant="contained" onClick={() => handleFortuneType('이번달 운세')}>이번달 운세</Button>
+                   </div>
                 {fortuneType || (
                     <Typography variant="h5" style={{ color: 'gold', marginBottom: '20px' }}>
                     선택한 카드를 통해 운세를 점쳐드립니다.</Typography>
@@ -172,27 +177,9 @@ function TarotComponent() {
                                 {`"${fortuneType}"에 맞는 타로점을 보여드리겠습니다.`}
                             </Typography>
                 )}
-                <div style={{ marginBottom: '20px' }}>
-                    <Button variant="contained" onClick={() => handleFortuneType('오늘의 운세')}>오늘의 운세</Button>
-                    <Button variant="contained" onClick={() => handleFortuneType('연애운')}>연애운</Button>
-                    <Button variant="contained" onClick={() => handleFortuneType('이번달 운세')}>이번달 운세</Button>
-                </div>
+
 
                 {/* 선택된 운세 유형에 따른 텍스트 표시 */}
-
-            <Snackbar
-                open={openSnackbar}
-                autoHideDuration={6000}
-                onClose={handleCloseSnackbar}
-                message="3장의 카드를 모두 선택하셨습니다."
-            />
-
-                <Typography variant="body1" style={{ marginBottom: '20px', color: 'gold' }}>
-
-                    {selectedCards.length === 3 ? "카드를 다시 고를 수 없습니다. " :
-                        `${3 - selectedCards.length}장의 카드를 신중하게 선택해 주세요.`
-                    }
-                </Typography>
                     <Button
                         variant="contained"
                         onClick={handleShowTarotCards}
@@ -204,6 +191,19 @@ function TarotComponent() {
                 )}
                 {showTarotCards && !showResults &&
                     (<>
+                            <Snackbar
+                                open={openSnackbar}
+                                autoHideDuration={6000}
+                                onClose={handleCloseSnackbar}
+                                message="3장의 카드를 모두 선택하셨습니다."
+                            />
+
+                            <Typography variant="body1" style={{ marginBottom: '20px', color: 'gold' }}>
+
+                                {selectedCards.length === 3 ? "카드를 다시 고를 수 없습니다. " :
+                                    `${3 - selectedCards.length}장의 카드를 신중하게 선택해 주세요.`
+                                }
+                            </Typography>
             <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', margin: '10px' }}>
                 {tarotCards.map((card, index) => (
                     <Card
