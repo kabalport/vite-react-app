@@ -1,6 +1,5 @@
 import MainHeader from './MainHeader';
 import MainFooter from './MainFooter';
-import * as React from 'react';
 import PropTypes from 'prop-types';
 import { Box } from '@mui/material';
 
