@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import { gptTarot } from "../../../../utils/gptTarot/getTarot";
 import Snackbar from '@mui/material/Snackbar';
+import { useNavigate } from 'react-router-dom';
 
 
 interface ResponseItem {
@@ -20,6 +21,7 @@ interface ResponseItem {
 }
 
 function TarotComponent() {
+    const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
     const [response, setResponse] = useState<ResponseItem[]>([]);
     const [selectedCards, setSelectedCards] = useState<string[]>([]);
@@ -77,6 +79,7 @@ function TarotComponent() {
 
 
     const toggleCardSelection = (card: string) => {
+
         // 이미 뒤집힌 카드를 다시 선택하려고 하는 경우 아무런 동작을 하지 않습니다.
         if (flippedCards.has(card)) {
             alert("다시 뒤집을 수는 없습니다.")
@@ -159,6 +162,7 @@ function TarotComponent() {
 
     const handleShowTarotCards = () => {
         setShowTarotCards(true);
+        navigate('/tarot/detail'); // '/tarot/detail' 경로로 이동
     };
 
 
@@ -269,9 +273,6 @@ function TarotComponent() {
                                 onClose={handleCloseSnackbar}
                                 message="3장의 카드를 모두 선택하셨습니다."
                             />
-                            <Typography variant="body1" style={{ marginBottom: '20px', color: 'gold' }}>
-                                보고싶은 점
-                            </Typography>
                             {/* 콤보박스로 변경된 부분 */}
                             <FormControl fullWidth style={{ marginBottom: '20px', maxWidth: '360px' }}>
                                 <Select
