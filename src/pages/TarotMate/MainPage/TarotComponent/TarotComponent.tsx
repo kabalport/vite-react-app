@@ -5,7 +5,6 @@ import {
     CardContent,
     CircularProgress,
     FormControl,
-    InputLabel,
     MenuItem,
     Select,
     Typography
@@ -45,7 +44,7 @@ function TarotComponent() {
 
 
     // 콤보박스 변경 핸들러
-    const handleFortuneChange = (event) => {
+    const handleFortuneChange = (event: any) => {
         setSelectedFortune(event.target.value);
         setFortuneType(event.target.value);
     };
