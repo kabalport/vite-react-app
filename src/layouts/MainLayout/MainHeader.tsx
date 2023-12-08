@@ -55,17 +55,24 @@ function MainHeader() {
                 backgroundColor: '#f0f0f0',
                 boxShadow: '0px 2px 4px -1px rgba(0,0,0,0.2)',
                 padding: '10px',
-                justifyContent: 'space-between'
+                display: 'flex', // Flex 컨테이너로 설정
             }}>
+                {/* 왼쪽 부분 (네비게이션 링크 또는 빈 공간) */}
+                <div style={{ flex: 1 }}>
 
-                <Link color="inherit" href="/">
+                </div>
+                {/* 중앙 부분 (로고) */}
+                <div style={{ flex: 1, display: 'flex', justifyContent: 'center' }}>
+                    <Link color="inherit" href="/">
                     <img
                         src="/images/TarotMate_logo.png"
                         alt="TarotMate Logo"
                         style={{ height: '50px' }}
                     />
-                </Link>
-
+                    </Link>
+                </div>
+                {/* 오른쪽 부분 (메뉴 버튼 또는 빈 공간) */}
+                <div style={{ flex: 1, display: 'flex', justifyContent: 'flex-end' }}>
                 {isMobile ? (
                     <IconButton color="inherit" onClick={toggleDrawer(true)}>
                         <MenuIcon />
@@ -79,7 +86,7 @@ function MainHeader() {
                         ))}
                     </div>
                 )}
-
+                </div>
                 {isMobile && mobileMenu}
             </Toolbar>
         </React.Fragment>
