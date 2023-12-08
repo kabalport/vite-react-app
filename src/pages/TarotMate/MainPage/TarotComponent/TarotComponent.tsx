@@ -14,14 +14,12 @@ function TarotComponent() {
         navigate('/tarot/detail'); // '/tarot/detail' 경로로 이동
     };
     return (
-        <div>
         <div style={{
             color: 'white',
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center', // 수직 중앙 정렬
             alignItems: 'center', // 수평 중앙 정렬
-            width: '100%', // 너비를 100%로 설정
         }}>
             <div style={{
                 padding: '20px',
@@ -97,7 +95,6 @@ function TarotComponent() {
                 )}
                 </div>
             </div>
-        </div>
     );
 }
 

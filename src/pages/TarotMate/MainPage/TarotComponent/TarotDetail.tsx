@@ -167,20 +167,17 @@ function TarotDetail() {
                         flexDirection: 'column',
                         justifyContent: 'center', // 수직 중앙 정렬
                         alignItems: 'center', // 수평 중앙 정렬
-                        minHeight: '100vh', // 전체 높이 차지
-                        width: '100%', // 너비를 100%로 설정
+
                     }}>
                         <CircularProgress />
                     </div>
                 ) : (
                     <>
                         <div style={{
-                            color: 'white',
                             display: 'flex',
                             flexDirection: 'column',
                             justifyContent: 'center', // 수직 중앙 정렬
                             alignItems: 'center', // 수평 중앙 정렬
-                            minHeight: '100vh', // 전체 높이 차지
                             width: '100%', // 너비를 100%로 설정
                         }}>
                             <div style={{
@@ -189,8 +186,7 @@ function TarotDetail() {
                                 display: 'flex',
                                 flexDirection: 'column',
                                 alignItems: 'center',
-                                color: 'white'
-
+                                backgroundColor: '#f4f7fe'
                             }}>
                                 {!showResults &&
                                     (<>
@@ -208,7 +204,7 @@ function TarotDetail() {
                                                     value={selectedFortune}
                                                     label="운세 선택"
                                                     onChange={handleFortuneChange}
-                                                    style={{ color: 'gold', border: '1px solid gold' }}
+                                                    style={{ color: 'black', border: '1px solid black' }}
                                                 >
                                                     {fortunes.map((fortune) => (
                                                         <MenuItem key={fortune.value} value={fortune.value}>
@@ -217,7 +213,7 @@ function TarotDetail() {
                                                     ))}
                                                 </Select>
                                             </FormControl>
-                                            <Typography variant="h5" style={{ color: 'gold', marginBottom: '20px', marginTop: '20px', }}>
+                                            <Typography variant="h5" style={{ color: 'black', marginBottom: '20px', marginTop: '20px', }}>
                                                 {`남은 카드 선택 가능 수: ${3 - selectedCards.length}`}
                                             </Typography>
                                             <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
@@ -236,7 +232,7 @@ function TarotDetail() {
                                                             alignItems: 'center',
                                                             transformStyle: 'preserve-3d',
                                                             transition: 'transform 0.3s ease, border 0.3s ease',
-                                                            border: selectedCards.includes(card.name) ? '3px solid gold' : '', // 선택된 카드에 두꺼운 금색 테두리 추가
+                                                            border: selectedCards.includes(card.name) ? '3px solid black' : '', // 선택된 카드에 두꺼운 금색 테두리 추가
                                                             transform: flippedCards.has(card.name) ? 'rotateY(180deg)' : 'rotateY(0deg)',
                                                         }}
                                                         onClick={() => toggleCardSelection(card.name)}
