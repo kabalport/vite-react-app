@@ -191,14 +191,13 @@ function TarotComponent() {
                    </Typography>
                    {/* 콤보박스로 변경된 부분 */}
                    <FormControl fullWidth style={{ marginBottom: '20px', maxWidth: '360px' }}>
-                       <InputLabel id="fortune-select-label" style={{ color: 'white' }}>운세 선택</InputLabel>
                        <Select
                            labelId="fortune-select-label"
                            id="fortune-select"
                            value={selectedFortune}
                            label="운세 선택"
                            onChange={handleFortuneChange}
-                           style={{ color: 'white', borderBottom: '1px solid white' }}
+                           style={{ color: 'gold', border: '1px solid gold' }}
                        >
                            {fortunes.map((fortune) => (
                                <MenuItem key={fortune.value} value={fortune.value}>
@@ -238,10 +237,7 @@ function TarotComponent() {
                            color: 'white', // 텍스트 색상을 흰색으로 설정
                            fontSize: '18px',
                            fontWeight: 600,
-                           borderRadius: '5px',
-                           '&:hover': {
-                               backgroundColor: '#664291' // 호버 시 버튼 색상 변경 (옵션)
-                           }
+                           borderRadius: '5px'
                        }}
                    >
                        타로 카드 보기

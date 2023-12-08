@@ -1,4 +1,3 @@
-import React from 'react';
 import { Typography, Box } from "@mui/material";
 
 function TarotMateBanner() {
@@ -38,7 +37,7 @@ function TarotMateBanner() {
                 <Typography variant="h5" style={{ marginBottom: '20px', fontWeight: 'bold', color: 'white' }}>
                     당신의 점을 봐 드립니다.
                 </Typography>
-                <Typography variant="h7" style={{ fontWeight: 'bold', color: 'white' }}>
+                <Typography variant="h6" style={{ fontWeight: 'bold', color: 'white' }}>
                     오늘 당신의 점을 봐 보는게 어떨까요?
                 </Typography>
             </Box>
