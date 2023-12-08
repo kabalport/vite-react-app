@@ -199,27 +199,6 @@ function TarotComponent() {
             }}>
                 {!showTarotCards && (
                <>
-                   <Typography variant="body1" style={{ marginBottom: '20px', color: 'gold' }}>
-                        보고싶은 점
-                   </Typography>
-                   {/* 콤보박스로 변경된 부분 */}
-                   <FormControl fullWidth style={{ marginBottom: '20px', maxWidth: '360px' }}>
-                       <Select
-                           labelId="fortune-select-label"
-                           id="fortune-select"
-                           value={selectedFortune}
-                           label="운세 선택"
-                           onChange={handleFortuneChange}
-                           style={{ color: 'gold', border: '1px solid gold' }}
-                       >
-                           {fortunes.map((fortune) => (
-                               <MenuItem key={fortune.value} value={fortune.value}>
-                                   {fortune.label}
-                               </MenuItem>
-                           ))}
-                       </Select>
-                   </FormControl>
-
                    <img src="../images/fortune-teller.png" alt="점성술사" width="360" height="360" />
 
                        <Card
@@ -290,7 +269,26 @@ function TarotComponent() {
                                 onClose={handleCloseSnackbar}
                                 message="3장의 카드를 모두 선택하셨습니다."
                             />
-
+                            <Typography variant="body1" style={{ marginBottom: '20px', color: 'gold' }}>
+                                보고싶은 점
+                            </Typography>
+                            {/* 콤보박스로 변경된 부분 */}
+                            <FormControl fullWidth style={{ marginBottom: '20px', maxWidth: '360px' }}>
+                                <Select
+                                    labelId="fortune-select-label"
+                                    id="fortune-select"
+                                    value={selectedFortune}
+                                    label="운세 선택"
+                                    onChange={handleFortuneChange}
+                                    style={{ color: 'gold', border: '1px solid gold' }}
+                                >
+                                    {fortunes.map((fortune) => (
+                                        <MenuItem key={fortune.value} value={fortune.value}>
+                                            {fortune.label}
+                                        </MenuItem>
+                                    ))}
+                                </Select>
+                            </FormControl>
                             <Typography variant="h5" style={{ color: 'gold', marginBottom: '20px', marginTop: '20px', }}>
                                 {`남은 카드 선택 가능 수: ${3 - selectedCards.length}`}
                             </Typography>
