@@ -163,8 +163,23 @@ function TarotComponent() {
 
 
     return (
+        <div>
+            <>
+                {isLoading ? (
+                    <div style={{
+                        color: 'white',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'center', // 수직 중앙 정렬
+                        alignItems: 'center', // 수평 중앙 정렬
+                        minHeight: '100vh', // 전체 높이 차지
+                        width: '100%', // 너비를 100%로 설정
+                    }}>
+                        <CircularProgress />
+                    </div>
+                ) : (
+                    <>
         <div style={{
-            backgroundColor: '#000000', // 전체 배경색
             color: 'white',
             display: 'flex',
             flexDirection: 'column',
@@ -179,7 +194,6 @@ function TarotComponent() {
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
-                backgroundColor: '#000000',
                 color: 'white'
 
             }}>
@@ -361,25 +375,23 @@ function TarotComponent() {
                     </>
                 )}
 
-            {isLoading ? (
-                <>
-                <CircularProgress />
-                </>
-                ) : (
-                // 결과 표시 영역
-             <>
                 {showResults && (
                     response && response.map((res, index) => (
                         <Card key={index} style={{ margin: '10px', maxWidth: 600 }}>
-                        <CardContent>
-                            {renderResponse(res.message.content)}
-                        </CardContent>
-                    </Card>
-                ))
-            )}
-             </>
+                            <CardContent>
+                                {renderResponse(res.message.content)}
+                            </CardContent>
+                        </Card>
+                    ))
                 )}
+
+                </div>
             </div>
+
+
+                    </>
+                )}
+            </>
         </div>
     );
 }
