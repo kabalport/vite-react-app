@@ -7,7 +7,7 @@ const MainLayout = (props: any) => {
     return (
         <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
             <MainHeader />
-            <Box component="main" sx={{ flexGrow: 1, display: 'flex' }}>
+            <Box component="main" >
                 {props.children}
             </Box>
             <MainFooter />
