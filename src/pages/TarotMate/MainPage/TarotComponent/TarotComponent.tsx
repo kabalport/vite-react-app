@@ -291,26 +291,18 @@ function TarotComponent() {
                                 message="3장의 카드를 모두 선택하셨습니다."
                             />
 
-                            <Typography variant="body1" style={{ marginBottom: '20px', color: 'gold' }}>
-
-                                {selectedCards.length === 3 ? "카드를 다시 고를 수 없습니다. " :
-                                    `${3 - selectedCards.length}장의 카드를 신중하게 선택해 주세요.`
-                                }
+                            <Typography variant="h5" style={{ color: 'gold', marginBottom: '20px', marginTop: '20px', }}>
+                                {`남은 카드 선택 가능 수: ${3 - selectedCards.length}`}
                             </Typography>
-                            {fortuneType && (
-                                <Typography variant="h6" style={{ marginBottom: '20px', color: 'gold' }}>
-                                    {`"${fortuneType}"에 맞는 타로점을 보여드리겠습니다.`}
-                                </Typography>
-                            )}
-            <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', margin: '10px' }}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
                 {tarotCards.map((card, index) => (
                     <Card
                         key={index}
                         style={{
                             cursor: 'pointer',
-                            margin: '5px',
-                            width: '90px',
-                            height: '120px',
+                            margin: '3px',
+                            width: '50px',
+                            height: '90px',
                             borderRadius: '10px',
                             boxShadow: '0 2px 5px rgba(0,0,0,0.2)',
                             display: 'flex',
@@ -348,15 +340,16 @@ function TarotComponent() {
                     </Card>
                 ))}
             </div>
-            <Typography variant="h5" style={{ color: 'gold', marginBottom: '20px' }}>
-                {`남은 카드 선택 가능 수: ${3 - selectedCards.length}`}
-            </Typography>
+
                         <Button
                             variant="contained"
                             color="primary"
                             onClick={handleButtonClick}
                             disabled={selectedCards.length !== 3 || isLoading}
                             style={{
+                                width: '360px', // 버튼의 가로 길이 설정
+                                height: '48px',
+                                marginTop: '20px',
                                 marginBottom: '20px',
                                 padding: '15px 30px',
                                 fontSize: '1rem',
