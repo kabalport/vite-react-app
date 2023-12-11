@@ -249,9 +249,7 @@ function TarotDetail() {
                                             <br />
                                             {getDisplayTextForSelectedTab()}
                                             <br />
-                                            <Typography variant="h5" style={{  marginBottom: '20px', marginTop: '20px' }}>
-                                                {`남은 카드 선택 가능 수: ${3 - selectedCards.length}`}
-                                            </Typography>
+
                                             <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
                                                 {tarotCards.map((card, index) => (
                                                     <Card
@@ -298,7 +296,9 @@ function TarotDetail() {
                                                     </Card>
                                                 ))}
                                             </div>
-
+                                            <Typography variant="h5" style={{  marginBottom: '20px', marginTop: '20px' }}>
+                                                {`남은 카드 선택 가능 수: ${3 - selectedCards.length}`}
+                                            </Typography>
                                             <Button
                                                 variant="contained"
                                                 color="primary"
