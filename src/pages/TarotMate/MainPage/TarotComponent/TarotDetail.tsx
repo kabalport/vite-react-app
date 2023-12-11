@@ -39,7 +39,7 @@ function TarotDetail() {
     const [fortuneType, setFortuneType] = useState(fortunes[0].value);
 
     // 콤보박스 변경 핸들러
-    const handleFortuneChange = (event: any, newValue: any) => {
+    const handleFortuneChange = (event, newValue: any) => {
         setSelectedFortune(newValue);
         setFortuneType(newValue);
     };

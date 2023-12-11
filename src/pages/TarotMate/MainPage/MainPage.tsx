@@ -1,12 +1,15 @@
 import Link from "@mui/material/Link";
+import {Typography} from "@mui/material";
 
 
 function MainPage() {
     return (
             <div>
-            <Link color="inherit" href="/tarot">
+                <Typography variant="body2" color="text.secondary" align="center">
+                <Link color="inherit" href="/tarot">
                 tarotmate
-            </Link>
+                </Link>
+                </Typography>
             </div>
     )
 }
