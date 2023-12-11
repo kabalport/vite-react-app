@@ -12,9 +12,16 @@ function App() {
               <BrowserRouter>
                   <Suspense fallback={<CircularProgress />}>
                   <Routes>
-                      {allRoutes.map((route, idx) => (
-                          <Route path={route.path} element={<MainLayout>{route.component}</MainLayout>} key={idx} />
-                      ))}
+                      {allRoutes.map((route, idx) => {
+                          const RouteLayout = route.layout || MainLayout;
+                          return (
+                              <Route
+                                  path={route.path}
+                                  element={<RouteLayout>{route.component}</RouteLayout>}
+                                  key={idx}
+                              />
+                          );
+                      })}
                   </Routes>
                   </Suspense>
               </BrowserRouter>
