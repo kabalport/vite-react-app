@@ -39,10 +39,11 @@ function TarotDetail() {
     const [fortuneType, setFortuneType] = useState(fortunes[0].value);
 
     // 콤보박스 변경 핸들러
-    const handleFortuneChange = (event, newValue: any) => {
+    const handleFortuneChange = (newValue: string) => {
         setSelectedFortune(newValue);
         setFortuneType(newValue);
     };
+
 
     // 타로 카드와 Unsplash 이미지 URL 매핑
     const tarotCards = [
@@ -228,7 +229,7 @@ function TarotDetail() {
                                             />
                                             <Tabs
                                                 value={selectedFortune}
-                                                onChange={handleFortuneChange}
+                                                onChange={(_, newValue) => handleFortuneChange(newValue)}
                                                 variant="scrollable" // Allows scrolling if tabs exceed parent width
                                                 scrollButtons="auto" // Show scroll buttons only when needed
                                                 indicatorColor="primary"
