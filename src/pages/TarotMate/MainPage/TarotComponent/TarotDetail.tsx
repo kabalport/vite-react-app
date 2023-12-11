@@ -3,9 +3,7 @@ import {
     Card,
     CardContent,
     CircularProgress,
-    FormControl,
-    MenuItem,
-    Select,
+    Tab, Tabs,
     Typography
 } from "@mui/material";
 import Snackbar from "@mui/material/Snackbar";
@@ -41,9 +39,9 @@ function TarotDetail() {
     const [fortuneType, setFortuneType] = useState(fortunes[0].value);
 
     // 콤보박스 변경 핸들러
-    const handleFortuneChange = (event: any) => {
-        setSelectedFortune(event.target.value);
-        setFortuneType(event.target.value);
+    const handleFortuneChange = (event: any, newValue: any) => {
+        setSelectedFortune(newValue);
+        setFortuneType(newValue);
     };
 
     // 타로 카드와 Unsplash 이미지 URL 매핑
@@ -155,6 +153,36 @@ function TarotDetail() {
     };
 
 
+    const getDisplayTextForSelectedTab = () => {
+        switch (selectedFortune) {
+            case '오늘의 운세':
+                return (
+                    <>
+                        <Typography variant="h5" style={{ fontWeight: 'bold' }}>당신의 하루는 어떨까요?</Typography>
+                        <Typography variant="subtitle2">오늘을 생각하며 카드를 뽑으세요</Typography>
+                    </>
+                );
+            case '연애운':
+                return (
+                    <>
+                        <Typography variant="subtitle1" style={{ fontWeight: 'bold' }}>나의 애정운</Typography>
+                        <Typography variant="subtitle2">이달을 생각하며 카드를 뽑아주세요</Typography>
+                    </>
+                );
+            case '이번달 운세':
+                return (
+                    <>
+                        <Typography variant="subtitle1" style={{ fontWeight: 'bold' }}>이번달 운세</Typography>
+                        <Typography variant="subtitle2">이번달 당신의 기운은 어떨까요?</Typography>
+                    </>
+                );
+            // Add more cases as needed for other tabs
+            default:
+                return '';
+        }
+    };
+
+
 
 
     return (
@@ -181,12 +209,14 @@ function TarotDetail() {
                             width: '100%', // 너비를 100%로 설정
                         }}>
                             <div style={{
-                                padding: '20px',
+                                margin: 0,
+                                padding: 0,
                                 width: '400px', // 너비
                                 display: 'flex',
                                 flexDirection: 'column',
                                 alignItems: 'center',
-                                backgroundColor: '#f4f7fe'
+                                backgroundColor: 'black',
+                                color: "white",
                             }}>
                                 {!showResults &&
                                     (<>
@@ -196,24 +226,29 @@ function TarotDetail() {
                                                 onClose={handleCloseSnackbar}
                                                 message="3장의 카드를 모두 선택하셨습니다."
                                             />
-                                            {/* 콤보박스로 변경된 부분 */}
-                                            <FormControl fullWidth style={{ marginBottom: '20px', maxWidth: '360px' }}>
-                                                <Select
-                                                    labelId="fortune-select-label"
-                                                    id="fortune-select"
-                                                    value={selectedFortune}
-                                                    label="운세 선택"
-                                                    onChange={handleFortuneChange}
-                                                    style={{ color: 'black', border: '1px solid black' }}
-                                                >
-                                                    {fortunes.map((fortune) => (
-                                                        <MenuItem key={fortune.value} value={fortune.value}>
-                                                            {fortune.label}
-                                                        </MenuItem>
-                                                    ))}
-                                                </Select>
-                                            </FormControl>
-                                            <Typography variant="h5" style={{ color: 'black', marginBottom: '20px', marginTop: '20px', }}>
+                                            <Tabs
+                                                value={selectedFortune}
+                                                onChange={handleFortuneChange}
+                                                variant="scrollable" // Allows scrolling if tabs exceed parent width
+                                                scrollButtons="auto" // Show scroll buttons only when needed
+                                                indicatorColor="primary"
+                                                textColor="primary"
+                                                aria-label="fortune selection tabs"
+                                                style={{
+                                                    backgroundColor: 'white',
+                                                    width: '400px',
+                                                    maxWidth: '400px', // Ensures Tabs do not exceed 400px
+                                                }}
+                                            >
+                                                {fortunes.map((fortune, index) => (
+                                                    <Tab key={index} label={fortune.label} value={fortune.value} />
+                                                ))}
+                                            </Tabs>
+                                            <br />
+                                            <br />
+                                            {getDisplayTextForSelectedTab()}
+                                            <br />
+                                            <Typography variant="h5" style={{  marginBottom: '20px', marginTop: '20px' }}>
                                                 {`남은 카드 선택 가능 수: ${3 - selectedCards.length}`}
                                             </Typography>
                                             <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
