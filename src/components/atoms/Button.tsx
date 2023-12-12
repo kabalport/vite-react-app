@@ -1,11 +1,11 @@
-export default function Button(props:any) {
-    const {color, text} = props;
+export default function Button({color, children}:any) {
 
     return (
         <button
             style={{
                 backgroundColor: color
             }}>
-            {text}</button>
+            {children}
+        </button>
     )
 }
