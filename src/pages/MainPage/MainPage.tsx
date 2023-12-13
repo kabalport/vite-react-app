@@ -1,10 +1,10 @@
-import Body from "./Body";
+import Joinform from "./Joinform";
 
 function MainPage() {
 
     return (
             <div>
-                <Body />
+                <Joinform />
             </div>
     )
 }
