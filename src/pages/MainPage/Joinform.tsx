@@ -1,15 +1,21 @@
+import { useState, useRef, ChangeEvent } from 'react';
 import "./Body.css";
-import { useState, useRef } from "react";
+
+type State = {
+    name: string;
+    gender: string;
+    bio: string;
+};
 
 export default function Joinform() {
-    const nameRef = useRef();
-    const [state, setState] = useState({
+    const nameRef = useRef<HTMLInputElement>(null);
+    const [state, setState] = useState<State>({
         name: "",
         gender: "",
         bio: "",
     });
 
-    const onChange = (e) => {
+    const onChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
         console.log(e.target.name + " : " + e.target.value);
         setState({
             ...state,
@@ -18,7 +24,7 @@ export default function Joinform() {
     };
 
     const onSubmit = () => {
-        if (state.name === "") {
+        if (state.name === "" && nameRef.current) {
             nameRef.current.focus();
         }
     };
@@ -46,11 +52,11 @@ export default function Joinform() {
                 </select>
             </div>
             <div>
-        <textarea
-            name="bio"
-            value={state.bio}
-            onChange={onChange}
-        />
+                <textarea
+                    name="bio"
+                    value={state.bio}
+                    onChange={onChange}
+                />
             </div>
             <div>
                 <button onClick={onSubmit}>회원가입</button>

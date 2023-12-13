@@ -1,11 +1,11 @@
+import { useState } from 'react';
 import Viewer from "../organisms/Viewer";
 import Controller from "../organisms/Controller";
-import { useState } from "react";
 
 function SimpleCounter() {
-    const [count, setCount] = useState(0);
+    const [count, setCount] = useState<number>(0); // 상태 타입 지정
 
-    const onClickButton = (value) => {
+    const onClickButton = (value: number) => { // 함수 매개변수 타입 지정
         setCount(count + value);
     };
 

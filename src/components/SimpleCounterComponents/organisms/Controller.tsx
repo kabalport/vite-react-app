@@ -1,5 +1,3 @@
-import React from 'react';
-
 // 버튼 컴포넌트의 props 타입 정의
 type ButtonProps = {
     text: string;
