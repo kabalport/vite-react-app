@@ -65,7 +65,7 @@ function TarotHeader() {
                 <div style={{ flex: 1, display: 'flex', justifyContent: 'center' }}>
                     <Link color="inherit" href="/">
                     <img
-                        src="/images/TarotMate_logo.png"
+                        src="/src/assets/images/TarotMate_logo.png"
                         alt="TarotMate Logo"
                         style={{ height: '50px' }}
                     />

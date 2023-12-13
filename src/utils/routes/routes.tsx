@@ -1,7 +1,7 @@
 // routes.tsx
-import TarotMateMainPage from "../../pages/MainPage/TarotMateMainPage";
+import TarotMateMainPage from "../../pages/TarotMainPage/TarotMateMainPage";
 import AboutPage from "../../pages/AboutPage/AboutPage";
-import TarotDetail from "../../pages/MainPage/TarotComponent/TarotDetail";
+import TarotDetail from "../../pages/TarotMainPage/TarotComponent/TarotDetail";
 import MainPage from "../../pages/MainPage/MainPage";
 import MainLayout from "../../layouts/MainLayout/MainLayout";
 import TarotLayout from "../../layouts/TarotMate/MainLayout/TarotLayout";
