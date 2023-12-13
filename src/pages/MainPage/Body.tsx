@@ -1,7 +1,7 @@
 import "./Body.css";
 import { useState, useRef } from "react";
 
-export default function Joinform() {
+export default function Body() {
     const nameRef = useRef();
     const [state, setState] = useState({
         name: "",
