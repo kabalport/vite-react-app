@@ -10,7 +10,8 @@ interface MainLayoutProps extends React.PropsWithChildren<{}> {
 
 const MainLayout: React.FC<MainLayoutProps> = (props) => {
     return (
-        <Box sx={{
+        <Box
+            sx={{
             display: 'flex',
             flexDirection: 'column',
             minHeight: '100vh'

@@ -4,7 +4,7 @@ function MainPage() {
 
     return (
             <div>
-                <Link color="inherit" href="/simplecounter">simple counter</Link>
+                <h5><Link color="inherit" href="/simplecounter">simple counter</Link></h5>
             </div>
     )
 }
