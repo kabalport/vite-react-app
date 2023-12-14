@@ -5,6 +5,7 @@ function MainPage() {
     return (
             <div>
                 <h5><Link color="inherit" href="/simplecounter">simple counter</Link></h5>
+                <h5><Link color="inherit" href="/todo">todoapp</Link></h5>
             </div>
     )
 }
