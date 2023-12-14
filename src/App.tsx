@@ -1,5 +1,5 @@
 import './App.css'
-import {allRoutes} from "./utils/routes/routes";
+import {allRoutes} from "./routes/routes";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {CircularProgress} from "@mui/material";
 import React, { Suspense } from 'react';

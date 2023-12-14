@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import Snackbar from "@mui/material/Snackbar";
 import {useState} from "react";
-import {gptTarot} from "../../../utils/gptTarot/getTarot";
+import {gptTarot} from "../utils/gptTarot/getTarot";
 
 
 interface ResponseItem {
