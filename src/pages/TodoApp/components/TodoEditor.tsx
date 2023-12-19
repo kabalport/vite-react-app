@@ -1,25 +1,29 @@
 import "./TodoEditor.css";
-import { useState, useRef } from "react";
+import {useState, useRef, ChangeEvent, KeyboardEvent} from "react";
 
-export default function TodoEditor({ onCreate }) {
-    const inputRef = useRef();
+interface TodoEditorProps {
+    onCreate: (content: string) => void;
+}
+
+export default function TodoEditor({ onCreate }: TodoEditorProps) {
+    const inputRef = useRef<HTMLInputElement | null>(null);
     const [content, setContent] = useState("");
 
-    const onChangeContent = (e) => {
+    const onChangeContent = (e: ChangeEvent<HTMLInputElement>) => {
         setContent(e.target.value);
     };
 
     const onClick = () => {
         if (content === "") {
-            inputRef.current.focus();
+            inputRef.current?.focus();
             return;
         }
         onCreate(content);
         setContent("");
     };
 
-    const onKeydown = (e) => {
-        if (e.keyCode === 13) {
+    const onKeydown = (e: KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === "Enter") {
             onClick();
         }
     };

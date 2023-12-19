@@ -2,9 +2,16 @@ import "./TodoApp.css";
 import TodoEditor from "./components/TodoEditor";
 import TodoList from "./components/TodoList";
 import Header from "./components/Header";
-import {useRef, useState} from "react";
+import { useRef, useState } from "react";
 
-const mockData = [
+interface Todo {
+    id: number;
+    isDone: boolean;
+    content: string;
+    createdDate: number;
+}
+
+const mockData: Todo[] = [
     {
         id: 0,
         isDone: true,
@@ -26,19 +33,18 @@ const mockData = [
 ];
 
 function TodoApp() {
+    const [todos, setTodos] = useState<Todo[]>(mockData);
+    const idRef = useRef<number>(3);
 
-const [todos, setTodos] = useState(mockData);
-const idRef = useRef(3);
-
-const onCreate = (content) => {
-    const newTodo = {
-        id: idRef.current++,
-        isDone: false,
-        content,
-        createdDate: new Date().getTime(),
+    const onCreate = (content: string) => {
+        const newTodo: Todo = {
+            id: idRef.current++,
+            isDone: false,
+            content,
+            createdDate: new Date().getTime(),
+        };
+        setTodos([...todos, newTodo]);
     };
-    setTodos([...todos, newTodo]);
-};
 
     return (
         <div className="App">
