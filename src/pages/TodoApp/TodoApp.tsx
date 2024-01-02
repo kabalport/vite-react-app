@@ -1,15 +1,15 @@
-import "./TodoApp.css";
-import TodoEditor from "./components/TodoEditor";
-import TodoList from "./components/TodoList";
-import Header from "./components/Header";
-import { useRef, useState } from "react";
+import { useState, useRef } from 'react';
+import './TodoApp.css';
+import Header from './components/Header';
+import TodoEditor from './components/TodoEditor';
+import TodoList from './components/TodoList';
 
-interface Todo {
+type Todo = {
     id: number;
     isDone: boolean;
     content: string;
-    createdDate: number;
-}
+    createdDate: number; // Assuming createdDate is a timestamp
+};
 
 const mockData: Todo[] = [
     {
@@ -46,11 +46,27 @@ function TodoApp() {
         setTodos([...todos, newTodo]);
     };
 
+    const onUpdate = (targetId: number) => {
+        setTodos(
+            todos.map((todo) =>
+                todo.id === targetId ? { ...todo, isDone: !todo.isDone } : todo
+            )
+        );
+    };
+
+    const onDelete = (targetId: number) => {
+        setTodos(todos.filter((todo) => todo.id !== targetId));
+    };
+
     return (
-        <div className="App">
+        <div className="TodoApp">
             <Header />
             <TodoEditor onCreate={onCreate} />
-            <TodoList />
+            <TodoList
+                todos={todos}
+                onUpdate={onUpdate}
+                onDelete={onDelete}
+            />
         </div>
     );
 }
