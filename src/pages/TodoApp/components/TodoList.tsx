@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent } from 'react';
+import { useState, ChangeEvent } from 'react';
 import TodoItem from './TodoItem';
 import './TodoList.css';
 
@@ -43,11 +43,10 @@ const TodoList = ({ todos, onUpdate, onDelete }: TodoListProps) => {
             <div className='todos_wrapper'>
                 {filterTodos().map((todo) => (
                     <TodoItem
-                        key={todo.id}
+                        createdDate={0} isDone={false} key={todo.id}
                         {...todo}
                         onUpdate={onUpdate}
-                        onDelete={onDelete}
-                    />
+                        onDelete={onDelete}                    />
                 ))}
             </div>
         </div>

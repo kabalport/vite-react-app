@@ -1,4 +1,4 @@
-import React from 'react';
+
 import './TodoItem.css';
 
 // Define a type for the TodoItem props

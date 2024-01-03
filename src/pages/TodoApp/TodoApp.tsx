@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useReducer, useRef } from 'react';
 import './TodoApp.css';
 import Header from './components/Header';
 import TodoEditor from './components/TodoEditor';
@@ -8,8 +8,13 @@ type Todo = {
     id: number;
     isDone: boolean;
     content: string;
-    createdDate: number; // Assuming createdDate is a timestamp
+    createdDate: number;
 };
+
+type Action =
+    | { type: 'CREATE'; data: Todo }
+    | { type: 'UPDATE'; data: number }
+    | { type: 'DELETE'; data: number };
 
 const mockData: Todo[] = [
     {
@@ -32,8 +37,23 @@ const mockData: Todo[] = [
     },
 ];
 
+function reducer(state: Todo[], action: Action): Todo[] {
+    switch (action.type) {
+        case 'CREATE':
+            return [...state, action.data];
+        case 'UPDATE':
+            return state.map(todo =>
+                todo.id === action.data ? { ...todo, isDone: !todo.isDone } : todo
+            );
+        case 'DELETE':
+            return state.filter(todo => todo.id !== action.data);
+        default:
+            throw new Error();
+    }
+}
+
 function TodoApp() {
-    const [todos, setTodos] = useState<Todo[]>(mockData);
+    const [todos, dispatch] = useReducer(reducer, mockData);
     const idRef = useRef<number>(3);
 
     const onCreate = (content: string) => {
@@ -43,30 +63,22 @@ function TodoApp() {
             content,
             createdDate: new Date().getTime(),
         };
-        setTodos([...todos, newTodo]);
+        dispatch({ type: 'CREATE', data: newTodo });
     };
 
     const onUpdate = (targetId: number) => {
-        setTodos(
-            todos.map((todo) =>
-                todo.id === targetId ? { ...todo, isDone: !todo.isDone } : todo
-            )
-        );
+        dispatch({ type: 'UPDATE', data: targetId });
     };
 
     const onDelete = (targetId: number) => {
-        setTodos(todos.filter((todo) => todo.id !== targetId));
+        dispatch({ type: 'DELETE', data: targetId });
     };
 
     return (
         <div className="TodoApp">
             <Header />
             <TodoEditor onCreate={onCreate} />
-            <TodoList
-                todos={todos}
-                onUpdate={onUpdate}
-                onDelete={onDelete}
-            />
+            <TodoList todos={todos} onUpdate={onUpdate} onDelete={onDelete} />
         </div>
     );
 }

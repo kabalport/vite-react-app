@@ -7,6 +7,8 @@ import MainLayout from "../layouts/MainLayout/MainLayout";
 import TarotLayout from "../layouts/TarotMate/MainLayout/TarotLayout";
 import SimpleCounterApp from "../pages/SimpleCounter/components/templates/SimpleCounterApp";
 import TodoApp from "../pages/TodoApp/TodoApp";
+import A from "../test/A.tsx";
+import B from "../test/B.tsx";
 
 export const HOME = "/";
 
@@ -25,7 +27,9 @@ const mainRoutes: Array<RouteProps> = [
     { path: "/tarot/about", component: <AboutPage /> },
     { path: "/tarot/detail", component: <TarotDetail />},
     { path: "/simplecounter", component: <SimpleCounterApp />},
-    { path: "/todo", component: <TodoApp />}
+    { path: "/todo", component: <TodoApp />},
+    { path: "/a", component: <A />},
+    { path: "/b", component: <B />}
 ];
 
 
