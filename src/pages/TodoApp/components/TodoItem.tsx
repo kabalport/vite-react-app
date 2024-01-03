@@ -1,21 +1,22 @@
+import { memo } from 'react';
+import "./TodoItem.css";
 
-import './TodoItem.css';
-
-// Define a type for the TodoItem props
+// Props 타입 정의
 type TodoItemProps = {
-    content: string;
-    createdDate: number; // Assuming createdDate is a timestamp (number)
-    isDone: boolean;
     id: number;
-    onUpdate: (id: number) => void; // Function type for onUpdate
-    onDelete: (id: number) => void; // Function type for onDelete
+    isDone: boolean;
+    createdDate: number;
+    content: string;
+    onUpdate: (id: number) => void;
+    onDelete: (id: number) => void;
 };
 
+// TodoItem 컴포넌트 정의
 const TodoItem = ({
-                      content,
-                      createdDate,
-                      isDone,
                       id,
+                      isDone,
+                      createdDate,
+                      content,
                       onUpdate,
                       onDelete,
                   }: TodoItemProps) => {
@@ -43,4 +44,7 @@ const TodoItem = ({
     );
 };
 
-export default TodoItem;
+// memo를 사용하여 컴포넌트 내보내기
+const MemoizedTodoItem = memo(TodoItem);
+
+export default MemoizedTodoItem;
