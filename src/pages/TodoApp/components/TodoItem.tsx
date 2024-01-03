@@ -1,25 +1,24 @@
-import { memo } from 'react';
+import { memo, useContext } from "react";
+import { TodoDispatchContext } from "../contexts/TodoContext";
 import "./TodoItem.css";
+import { TodoDispatchContextType } from "../types/TodoTypes"; // 타입 정의 임포트
 
-// Props 타입 정의
 type TodoItemProps = {
     id: number;
     isDone: boolean;
     createdDate: number;
     content: string;
-    onUpdate: (id: number) => void;
-    onDelete: (id: number) => void;
 };
 
-// TodoItem 컴포넌트 정의
-const TodoItem = ({
-                      id,
-                      isDone,
-                      createdDate,
-                      content,
-                      onUpdate,
-                      onDelete,
-                  }: TodoItemProps) => {
+function TodoItem({ id, isDone, createdDate, content }: TodoItemProps) {
+    const dispatch = useContext<TodoDispatchContextType | undefined>(TodoDispatchContext);
+
+    if (!dispatch) {
+        throw new Error("TodoDispatchContext not found");
+    }
+
+    const { onUpdate, onDelete } = dispatch;
+
     const onChangeCheckbox = () => {
         onUpdate(id);
     };
@@ -42,9 +41,10 @@ const TodoItem = ({
             <button onClick={onClickDeleteButton}>삭제</button>
         </div>
     );
-};
+}
 
-// memo를 사용하여 컴포넌트 내보내기
+// memo로 감싼 컴포넌트에 명명된 변수를 할당
 const MemoizedTodoItem = memo(TodoItem);
 
+// 명명된 변수를 내보냄
 export default MemoizedTodoItem;

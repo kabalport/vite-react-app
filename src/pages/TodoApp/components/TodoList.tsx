@@ -1,21 +1,12 @@
-import { useState, useMemo, ChangeEvent } from 'react';
+import { useState, useMemo, useContext, ChangeEvent } from "react";
 import TodoItem from "./TodoItem";
 import "./TodoList.css";
+import { TodoStateContext } from "../contexts/TodoContext";
+import { Todo } from '../types/TodoTypes';
 
-type Todo = {
-    id: number;
-    isDone: boolean;
-    content: string;
-    createdDate: number;
-};
+export default function TodoList() {
+    const todos = useContext<Todo[] | undefined>(TodoStateContext);
 
-type TodoListProps = {
-    todos: Todo[];
-    onUpdate: (id: number) => void;
-    onDelete: (id: number) => void;
-};
-
-export default function TodoList({ todos, onUpdate, onDelete }: TodoListProps) {
     const [search, setSearch] = useState<string>("");
 
     const onChangeSearch = (e: ChangeEvent<HTMLInputElement>) => {
@@ -23,6 +14,7 @@ export default function TodoList({ todos, onUpdate, onDelete }: TodoListProps) {
     };
 
     const filterTodos = (): Todo[] => {
+        if (!todos) return [];
         if (search === "") {
             return todos;
         }
@@ -31,17 +23,13 @@ export default function TodoList({ todos, onUpdate, onDelete }: TodoListProps) {
         );
     };
 
-    const { totalCount, doneCount, notDoneCount } =
-        useMemo(() => {
-            const totalCount = todos.length;
-            const doneCount = todos.filter((todo) => todo.isDone).length;
-            const notDoneCount = totalCount - doneCount;
-            return {
-                totalCount,
-                doneCount,
-                notDoneCount,
-            };
-        }, [todos]);
+    const { totalCount, doneCount, notDoneCount } = useMemo(() => {
+        if (!todos) return { totalCount: 0, doneCount: 0, notDoneCount: 0 };
+        const totalCount = todos.length;
+        const doneCount = todos.filter((todo) => todo.isDone).length;
+        const notDoneCount = totalCount - doneCount;
+        return { totalCount, doneCount, notDoneCount };
+    }, [todos]);
 
     return (
         <div className="TodoList">
@@ -58,12 +46,7 @@ export default function TodoList({ todos, onUpdate, onDelete }: TodoListProps) {
             />
             <div className="todos_wrapper">
                 {filterTodos().map((todo) => (
-                    <TodoItem
-                        key={todo.id}
-                        {...todo}
-                        onUpdate={onUpdate}
-                        onDelete={onDelete}
-                    />
+                    <TodoItem key={todo.id} {...todo} />
                 ))}
             </div>
         </div>

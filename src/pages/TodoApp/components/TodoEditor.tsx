@@ -1,13 +1,18 @@
+import { useRef, useState, useContext, ChangeEvent, KeyboardEvent } from "react";
 import "./TodoEditor.css";
-import {useState, useRef, ChangeEvent, KeyboardEvent} from "react";
+import { TodoDispatchContext } from "../contexts/TodoContext";
+import { TodoDispatchContextType } from "../types/TodoTypes"; // 이 부분은 컨텍스트의 타입 정의를 포함하는 파일을 임포트합니다.
 
-interface TodoEditorProps {
-    onCreate: (content: string) => void;
-}
+export default function TodoEditor() {
+    const dispatch = useContext<TodoDispatchContextType | undefined>(TodoDispatchContext);
 
-export default function TodoEditor({ onCreate }: TodoEditorProps) {
-    const inputRef = useRef<HTMLInputElement | null>(null);
-    const [content, setContent] = useState("");
+    if (!dispatch) {
+        throw new Error("TodoDispatchContext not found");
+    }
+    const { onCreate } = dispatch;
+
+    const [content, setContent] = useState<string>("");
+    const inputRef = useRef<HTMLInputElement>(null);
 
     const onChangeContent = (e: ChangeEvent<HTMLInputElement>) => {
         setContent(e.target.value);
@@ -22,8 +27,8 @@ export default function TodoEditor({ onCreate }: TodoEditorProps) {
         setContent("");
     };
 
-    const onKeydown = (e: KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === "Enter") {
+    const onKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter') {
             onClick();
         }
     };
@@ -34,7 +39,7 @@ export default function TodoEditor({ onCreate }: TodoEditorProps) {
                 ref={inputRef}
                 value={content}
                 onChange={onChangeContent}
-                onKeyDown={onKeydown}
+                onKeyDown={onKeyDown}
                 placeholder="새로운 Todo ..."
             />
             <button onClick={onClick}>추가</button>
