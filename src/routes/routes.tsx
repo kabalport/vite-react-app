@@ -7,8 +7,11 @@ import MainLayout from "../layouts/MainLayout/MainLayout";
 import TarotLayout from "../layouts/TarotMate/MainLayout/TarotLayout";
 import SimpleCounterApp from "../pages/SimpleCounter/components/templates/SimpleCounterApp";
 import TodoApp from "../pages/TodoApp/TodoApp";
-import A from "../test/A.tsx";
-import B from "../test/B.tsx";
+import NotFoundPage from "../pages/errorPage/NotFoundPage/NotFoundPage.tsx";
+import Search from "../pages/NarasApp/Search.tsx";
+import Country from "../pages/NarasApp/Country.tsx";
+import NarasApp from "../pages/NarasApp/NarasApp.tsx";
+import NarasLayout from "../pages/NarasApp/layouts/NarasLayout.tsx";
 
 export const HOME = "/";
 
@@ -16,7 +19,7 @@ export const HOME = "/";
 interface RouteProps {
     path: string;
     component: React.ReactNode;
-    layout?: React.ComponentType;
+    layout?: any;
     exact?: boolean;
 }
 
@@ -28,8 +31,10 @@ const mainRoutes: Array<RouteProps> = [
     { path: "/tarot/detail", component: <TarotDetail />},
     { path: "/simplecounter", component: <SimpleCounterApp />},
     { path: "/todo", component: <TodoApp />},
-    { path: "/a", component: <A />},
-    { path: "/b", component: <B />}
+    { path: "/search", component: <Search />, layout: NarasLayout },
+    { path: "/country/:code", component: <Country />, layout: NarasLayout },
+    { path: "/naras", component: <NarasApp />, layout: NarasLayout },
+    { path: "*", component: <NotFoundPage />},
 ];
 
 

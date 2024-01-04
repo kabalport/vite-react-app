@@ -1,12 +1,30 @@
-import Link from "@mui/material/Link";
+import { useNavigate } from 'react-router-dom';
 
 function MainPage() {
+    const nav = useNavigate();
+
+    const navigateTo = (path: string) => {
+        nav(path);
+    };
 
     return (
-            <div>
-                <h5><Link color="inherit" href="/simplecounter">simple counter</Link></h5>
-                <h5><Link color="inherit" href="/todo">todoapp</Link></h5>
-            </div>
+        <div>
+            <button onClick={() => navigateTo('/simplecounter')}>
+                simple counter
+            </button>
+            <button onClick={() => navigateTo('/todo')}>
+                todoapp
+            </button>
+            <button onClick={() => navigateTo('/search')}>
+                Search
+            </button>
+            <button onClick={() => navigateTo('/country')}>
+                Country
+            </button>
+            <button onClick={() => navigateTo('/naras')}>
+                naras
+            </button>
+        </div>
     )
 }
 
