@@ -8,10 +8,10 @@ import TarotLayout from "../layouts/TarotMate/MainLayout/TarotLayout";
 import SimpleCounterApp from "../pages/SimpleCounter/components/templates/SimpleCounterApp";
 import TodoApp from "../pages/TodoApp/TodoApp";
 import NotFoundPage from "../pages/errorPage/NotFoundPage/NotFoundPage.tsx";
-import Search from "../pages/NarasApp/Search.tsx";
-import Country from "../pages/NarasApp/Country.tsx";
-import NarasApp from "../pages/NarasApp/NarasApp.tsx";
-import NarasLayout from "../pages/NarasApp/layouts/NarasLayout.tsx";
+import Search from "../NarasApp/pages/Search.tsx";
+import Country from "../NarasApp/pages/Country.tsx";
+import NarasApp from "../NarasApp/NarasApp.tsx";
+import NarasLayout from "../NarasApp/layouts/NarasLayout.tsx";
 
 export const HOME = "/";
 
