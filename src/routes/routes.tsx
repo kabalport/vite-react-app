@@ -12,6 +12,7 @@ import Search from "../NarasApp/pages/Search.tsx";
 import Country from "../NarasApp/pages/Country.tsx";
 import NarasApp from "../NarasApp/NarasApp.tsx";
 import NarasLayout from "../NarasApp/layouts/NarasLayout.tsx";
+import LoginPage from "../pages/LoginPage.tsx";
 
 export const HOME = "/";
 
@@ -34,6 +35,7 @@ const mainRoutes: Array<RouteProps> = [
     { path: "/search", component: <Search />, layout: NarasLayout },
     { path: "/country/:code", component: <Country />, layout: NarasLayout },
     { path: "/naras", component: <NarasApp />, layout: NarasLayout },
+    { path: "/login", component: <LoginPage /> },
     { path: "*", component: <NotFoundPage />},
 ];
 
